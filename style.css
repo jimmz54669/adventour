@@ -1,0 +1,44 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    outline: none;
+}
+#bukaspa {
+    align-content: center;
+    margin-top: 12%;
+}
+#container {
+    display: flex;
+    justify-content: center;
+}
+.card {
+    box-shadow: 8px 8px 12px lightgray;
+}
+.needs-validation {
+    margin-left: 2%;
+    margin-right: 2%;
+}
+hr {
+    margin-top: 10%;
+}
+
+#txtDate{
+    width: 100%;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.terms{
+    background: transparent;
+    color: blue;
+    border: none;
+}
+
+
+
