@@ -1,9 +1,9 @@
 
 <?php
 class Database{
-  protected $host = "localhost"; /* Host name */
+  protected $host = "167.172.82.75"; /* Host name */
   protected $user = "root"; /* User */
-  protected $password = "root"; /* Password */
+  protected $password = "adventour123"; /* Password */
   protected $dbname = "adventour_db"; /* Database name */
 
   public function connect()
