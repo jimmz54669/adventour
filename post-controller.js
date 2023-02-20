@@ -48,7 +48,7 @@ $(document).on('click','#btn_sub', function(){
                         $('.post-text').val(''); //Clears the input after clicking the Post Button
                         console.log('Success');
                         alert("Successfully Posted!");
-                        //location.reload();
+                        location.reload();
                     },
                     error: function(data){
                         console.log('There Something Wrong With Code!');
