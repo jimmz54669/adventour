@@ -13,6 +13,7 @@ class Post extends Database{
                 $UserId = $_POST['userid'];
                 $PostLocation = $_POST['post-location'];
                 $DatePosted = date("Y-m-d h:i:sa");
+                $post_id = '';
                 //DB SAVE POST AND UPLOAD
                 //Save Post
                 if(isset($_POST['post-txt'])){
@@ -50,6 +51,14 @@ class Post extends Database{
                     $res = $this->connect()->query($IfPostExist);
                     $numIfPostExistRows = $res->num_rows;
                     print_r($numIfPostExistRows);
+                    
+                    $sqlstr = "SELECT MAX(id) FROM posts WHERE userid='$UserId'";
+                    $get_post_id = $this->connect()->query($sqlstr);
+                    while($row = $get_post_id->fetch_row()){
+                        $post_id = $row[0];
+//                         echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
+                    }
+                    
                     if($numIfPostExistRows > 0){
                         $sql = "INSERT INTO postpics (name, userid, postid) VALUES ('$name', '$UserId', '$post_id')";
                         if($this->connect()->query($sql)){
