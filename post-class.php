@@ -45,7 +45,7 @@ class Post extends Database{
                             $IfPostExist = "SELECT * FROM Posts WHERE id = '$post_id'";
                             $res = $this->connect()->query($IfPostExist);
                             $numIfPostExistRows = $res->num_rows;
-                            print_r($numIfPostExistRows);
+                            print_r($IfPostExist);
 
 
 
