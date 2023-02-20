@@ -26,42 +26,7 @@ class Post extends Database{
                         $get_post_id = $this->connect()->query($sqlstr);
                         while($row = $get_post_id->fetch_row()){
                             $post_id = $row[0];
-                            //echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
-                        }
-                        
-                        if($_FILES["photo_post"]["name"] != '' || $_FILES["photo_post"]["name"] != NULL){
-                            //LOCAL FILE UPLOAD
-                            $PostPic = explode('.', $_FILES["photo_post"]["name"]);
-                            $ext = end($PostPic);
-                            $name = rand(100, 999) . '.' . $ext;
-                            $location = 'uploads/' . $name;
-                            $image = new SimpleImage();
-                            $image->createResizedImage($_FILES["photo_post"]["tmp_name"],$location,500,500);
-
-                        
-
-
-                            //CHECK IF POST ID EXIST ON DATABASE
-                            $IfPostExist = "SELECT * FROM posts WHERE id = '$post_id'";
-                            $res = $this->connect()->query($IfPostExist);
-                            $numIfPostExistRows = $res->num_rows;
-                            print_r($IfPostExist);
-
-
-
-                            if($numIfPostExistRows > 0){
-                                $sql = "INSERT INTO postpics (name, userid, postid) VALUES ('$name', '$UserId', '$post_id')";
-                                if($this->connect()->query($sql)){
-                                    $_SESSION['showAlert'] = true;
-                                    echo 'Uploaded';
-                                }else{
-                                    $_SESSION['showError'] = "ERROR: Hush! Sorry $sql. "
-                                    . $this->connect()->connect_error;
-                                    //header("location: profile.php");
-                                    // Close connection
-                                    $this->connect()->close();
-                                }
-                            }
+                            echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
                         }
 
                     }else{
@@ -72,7 +37,34 @@ class Post extends Database{
                 }
                 //Save Post Photo
 
-                
+                if($_FILES["photo_post"]["name"] != '' || $_FILES["photo_post"]["name"] != NULL){
+                    //LOCAL FILE UPLOAD
+                    $PostPic = explode('.', $_FILES["photo_post"]["name"]);
+                    $ext = end($PostPic);
+                    $name = rand(100, 999) . '.' . $ext;
+                    $location = 'uploads/' . $name;
+                    $image = new SimpleImage();
+                    $image->createResizedImage($_FILES["photo_post"]["tmp_name"],$location,500,500);
+
+                    //CHECK IF POST ID EXIST ON DATABASE
+                    $IfPostExist = "SELECT * FROM posts WHERE id = '$post_id'";
+                    $res = $this->connect()->query($IfPostExist);
+                    $numIfPostExistRows = $res->num_rows;
+                    print_r($numIfPostExistRows);
+                    if($numIfPostExistRows > 0){
+                        $sql = "INSERT INTO postpics (name, userid, postid) VALUES ('$name', '$UserId', '$post_id')";
+                        if($this->connect()->query($sql)){
+                            $_SESSION['showAlert'] = true;
+                            echo 'Uploaded';
+                        }else{
+                            $_SESSION['showError'] = "ERROR: Hush! Sorry $sql. "
+                            . $this->connect()->connect_error;
+                            //header("location: profile.php");
+                            // Close connection
+                            $this->connect()->close();
+                        }
+                    }
+                }
 
             //}
         }//end function SavePost
