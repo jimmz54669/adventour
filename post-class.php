@@ -26,7 +26,7 @@ class Post extends Database{
                         $get_post_id = $this->connect()->query($sqlstr);
                         while($row = $get_post_id->fetch_row()){
                             $post_id = $row[0];
-                            echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
+                            //echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
                         }
 
                     }else{
@@ -50,7 +50,7 @@ class Post extends Database{
                     $get_post_id = $this->connect()->query($sqlstr);
                     while($row = $get_post_id->fetch_row()){
                         $post_id = $row[0];
-//                         echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
+//                         echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id.' - '.$name;
                     }
                     
                     
