@@ -46,18 +46,21 @@ class Post extends Database{
                     $image = new SimpleImage();
                     $image->createResizedImage($_FILES["photo_post"]["tmp_name"],$location,500,500);
 
-                    //CHECK IF POST ID EXIST ON DATABASE
-                    $IfPostExist = "SELECT * FROM Posts WHERE id = '$post_id'";
-                    $res = $this->connect()->query($IfPostExist);
-                    $numIfPostExistRows = $res->num_rows;
-                    print_r($numIfPostExistRows);
-                    
                     $sqlstr = "SELECT MAX(id) FROM posts WHERE userid='$UserId'";
                     $get_post_id = $this->connect()->query($sqlstr);
                     while($row = $get_post_id->fetch_row()){
                         $post_id = $row[0];
 //                         echo $PostTxt.' - '.$DatePosted.' - '.$UserId.' - '.$post_id;
                     }
+                    
+                    
+                    //CHECK IF POST ID EXIST ON DATABASE
+                    $IfPostExist = "SELECT * FROM Posts WHERE id = '$post_id'";
+                    $res = $this->connect()->query($IfPostExist);
+                    $numIfPostExistRows = $res->num_rows;
+                    print_r($numIfPostExistRows);
+                    
+                    
                     
                     if($numIfPostExistRows > 0){
                         $sql = "INSERT INTO postpics (name, userid, postid) VALUES ('$name', '$UserId', '$post_id')";
